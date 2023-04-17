@@ -29,7 +29,7 @@ export default function Navbar() {
   return (
     <header
       className={`shadow-card xs:px-6 sm:px-10 md:px-16 w-full px-12 py-3 transition-all duration-150 ease-in ${
-        scrolled ? "bg-pink-500" : "bg-[#ed7117]"
+        scrolled ? "bg-[#893101]" : "bg-[#893101]"
       }`}
     >
       <nav className={`flex items-center justify-between`}>
@@ -54,7 +54,7 @@ export default function Navbar() {
             <li
               key={nav.id}
               className={`${
-                active === nav.title ? "text-black-100" : "text-white"
+                active === nav.title ? "text-red-400" : "text-white"
               } hover:text-red-400 text-[18px] font-medium cursor-pointer transition-all duration-150 ease-in`}
               onClick={() => setActive(nav.title)}
             >

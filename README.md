@@ -41,4 +41,6 @@ export default function App() {
 
 But when the page reloads, the admin can't see the edit post button in the `SinglePostPage` and the `Add new post` link in the navbar disappears.
 
+If I type the url `localhost:5173/add-new-post` and enter, the admin can again view the `Add new post` link in the navbar and edit post button in the `SinglePostPage`.
+
 

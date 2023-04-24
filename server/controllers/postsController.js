@@ -19,11 +19,11 @@ const createPost = async (req, res) => {
 
 const createManyPosts = async (req, res) => {
   try {
-    const manyPosts = await PostModel.insertMany(req.body)
+    const manyPosts = await PostModel.insertMany(req.body);
     res.status(201).json({
       success: true,
-      data: manyPosts
-    })
+      data: manyPosts,
+    });
   } catch (error) {
     res.status(401).json({
       success: false,
@@ -31,7 +31,7 @@ const createManyPosts = async (req, res) => {
     });
     console.log(error);
   }
-}
+};
 
 const getPosts = async (req, res) => {
   const pageNumber = req.query.pageNumber;
@@ -40,17 +40,15 @@ const getPosts = async (req, res) => {
   try {
     const totalPosts = await PostModel.countDocuments({});
 
-    const posts = await PostModel.find().limit(limit * pageNumber);
+    const posts = await PostModel.find().sort({createdAt: -1}).limit(limit * pageNumber);
     const maxPageNumber = Math.floor(totalPosts / limit) + 1;
     console.log(maxPageNumber);
-    res
-      .status(200)
-      .json({
-        success: true,
-        totalPosts: totalPosts,
-        maxPageNumber: maxPageNumber,
-        posts: posts,
-      });
+    res.status(200).json({
+      success: true,
+      totalPosts: totalPosts,
+      maxPageNumber: maxPageNumber,
+      posts: posts,
+    });
   } catch (error) {
     res.status(401).json({
       success: false,
@@ -82,13 +80,67 @@ const getSinglePost = async (req, res) => {
   }
 };
 
-// export const editPost = async (req, res) => {};
+const editPost = async (req, res) => {
+  try {
+    const id = req.params.id;
 
-// export const deletePost = async (req, res) => {};
+    console.log("id: ", id)
+
+    const editedPost = await PostModel.findOneAndUpdate({ _id: id }, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!editedPost) {
+      return res
+        .status(400)
+        .json({ success: false, message: "post doesn't exits" });
+    }
+
+    console.log('edited psot', editedPost)
+
+    res.status(200).json({
+      success: true,
+      message: "post successfully updated",
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      error: error,
+      message: "something went wrong while editing the post",
+    });
+  }
+};
+
+const deletePost = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const deletedPost = await PostModel.findOneAndDelete({ _id: id });
+
+    if (!deletedPost) {
+      return res
+        .status(400)
+        .json({ success: false, message: "post doesn't exits" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "post successfully deleted",
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      message: "something went wrong while deleting the post",
+    });
+  }
+};
 
 module.exports = {
   createPost,
+  editPost,
   createManyPosts,
   getPosts,
   getSinglePost,
+  deletePost,
 };

@@ -28,9 +28,11 @@ function App() {
         <Route path="blog" element={<PostsList />} />
         <Route path="blog/:blogPostId" element={<SinglePostPage />} />
 
-        <Route element={<RequireAuth />}>
-          <Route path="add-new-post" element={<AddPostForm />} />
-          <Route path="blog/edit/:blogPostId" element={<EditPostForm />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="add-new-post" element={<AddPostForm />} />
+            <Route path="blog/edit/:blogPostId" element={<EditPostForm />} />
+          </Route>
         </Route>
 
         {/* Catch all - replace with 404 component if you want */}

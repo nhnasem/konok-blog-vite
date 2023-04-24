@@ -9,9 +9,36 @@ admin password: admin
 user email: user@gmail.com
 user password: user
 
-The problem I'm facing right now is that: when the admin logs in, he can view the `add-new-post` page
-that creates a new blog post. He can also visit the edit post route which is in the `SinglePostPage`.
+But I'm facing problem with the `PersistLogin.jsx` component which is in the `client/src/features/auth/PersistLogin.jsx` directory.
 
-But when I reload the page, the admin can no longer visit the `add-new-post` page or the edit post page.
+If I wrap the `PersistLogin.jsx` component like the following, afther the admin logs in, he can view the `add-new-post` page. He can also see the edit post button in the `SinglePostPage` that only the admin can see.
+```js
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="login" element={<Login />} />
 
-I need some way to keep the admin logged in so that he doesn't need to log in every time he reloads the page.
+        {/* <Route path="register" element={<Register />} /> */}
+        <Route index element={<Home />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="contact" element={<ContactPage />} />
+        <Route path="blog" element={<PostsList />} />
+        <Route path="blog/:blogPostId" element={<SinglePostPage />} />
+
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="add-new-post" element={<AddPostForm />} />
+            <Route path="blog/edit/:blogPostId" element={<EditPostForm />} />
+          </Route>
+        </Route>
+
+        <Route path="*" element={<div>Error 404</div>} />
+      </Route>
+    </Routes>
+  );
+```
+
+But when the page reloads, the admin can't see the edit post button in the `SinglePostPage` and the `Add new post` link in the navbar disappears.
+
+

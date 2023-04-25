@@ -23,7 +23,7 @@ const PostsExcerpt = ({ post }) => {
   // });
 
   return (
-    <article className="mx-4 my-2 w-80 cursor-pointer">
+    <article className="xs:mx-auto my-2 w-80 cursor-pointer">
       {/* <div className="absolute -top-[1px] -left-[9px] mt-5">
         <div className="flex flex-col justify-center items-center">
           <div className="w-4 h-4 rounded-full bg-pink-400" />

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PostsExcerpt from "./PostsExcerpt";
 import { useGetPostsQuery } from "./postsSlice";
-import { Link } from "react-router-dom";
 
 export default function PostsList() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -16,7 +15,7 @@ export default function PostsList() {
   } = useGetPostsQuery(pageNumber);
 
   useEffect(() => {
-    console.log("posts: ", posts?.posts.length);
+    // console.log("posts: ", posts?.posts?.length);
     setTotalPosts(posts?.totalPosts);
   }, [posts]);
 
@@ -26,7 +25,7 @@ export default function PostsList() {
 
   let loadMorePostsButton = (
     <button
-      className="px-4 py-3 w-[150px] mx-auto my-4 border border-red-500 rounded-lg"
+      className="bg-[#25003e] text-white tracking-wider px-4 py-3 xs:w-[200px] xs:mx-auto my-4 border border-[#25003e] rounded-lg"
       onClick={() => doSomething()}
     >
       Load More
@@ -56,11 +55,11 @@ export default function PostsList() {
   }
 
   return (
-    <div>
-      <section className="flex flex-row flex-wrap w-[800px] mt-6">
+    <div className="transition-all duration-300 ease-in">
+      <section className=" xs:w-full xs:mx-auto sm:flex sm:flex-row sm:flex-wrap sm:gap-4 sm:w-[full]">
         {content}
       </section>
-      <div className="w-[800px] mx-auto">{loadMorePostsButton}</div>
+      <div className="flex">{loadMorePostsButton}</div>
     </div>
   );
 }

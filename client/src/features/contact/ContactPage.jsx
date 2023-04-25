@@ -59,55 +59,55 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="w-[600px] mx-auto mt-6 border px-10 py-6 rounded-md shadow-md">
-      <h2 className="text-xl font-light">Get in touch</h2>
-      <h3 className="text-5xl font-medium drop-shadow-md text-black-100 text-opacity-75 mb-8">
-        Contact
-      </h3>
+    <div className="xs:w-full sm:w-[500px] sm:border sm:shadow-md mx-auto mt-6 px-10 py-6 rounded-md transition-all duration-300 ease-in">
+      <h2 className="text-center text-4xl font-medium drop-shadow-md text-black-100 text-opacity-50 mb-8">
+        Get in touch
+      </h2>
+
       <form
         ref={formRef}
         onSubmit={handleSubmit}
         className="flex flex-col gap-8 "
       >
         <label className="flex flex-col">
-          <span className="text-black-100 font-light mb-4">Your Name</span>
+          <span className="font-light mb-1 tracking-wide text-gray-600 text-sm">Your Name</span>
           <input
             type="text"
             name="name"
             value={form.name}
             onChange={handleChange}
             placeholder="What's your good name?"
-            className=" py-4 px-6 placeholder:text-black-100 placeholder:opacity-30 border border-black-100 border-opacity-30 rounded-lg outline-none"
+            className=" py-4 px-6 bg-[#28003e0e] placeholder:text-black-100 placeholder:opacity-30 border border-black-100 border-opacity-30 rounded-lg outline-none"
           />
         </label>
 
         <label className="flex flex-col">
-          <span className="text-black-100 font-light mb-4">Your email</span>
+          <span className="font-light mb-1 tracking-wide text-gray-600 text-sm">Your email</span>
           <input
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
-            placeholder="What's your web address?"
-            className=" py-4 px-6 placeholder:text-black-100 placeholder:opacity-30 border border-black-100 border-opacity-30 rounded-lg outline-none"
+            placeholder="What's your email address?"
+            className=" py-4 px-6 bg-[#28003e0e] placeholder:text-black-100 placeholder:opacity-30 border border-black-100 border-opacity-30 rounded-lg outline-none"
           />
         </label>
 
         <label className="flex flex-col">
-          <span className="text-black-100 font-light mb-4">Your Message</span>
+          <span className="font-light mb-1 tracking-wide text-gray-600 text-sm">Your Message</span>
           <textarea
             rows={7}
             name="message"
             value={form.message}
             onChange={handleChange}
             placeholder="What you want to say?"
-            className=" py-4 px-6 placeholder:text-black-100 placeholder:opacity-30 border border-black-100 border-opacity-30 rounded-lg outline-none"
+            className=" py-4 px-6 bg-[#28003e0e] placeholder:text-black-100 placeholder:opacity-30 border border-black-100 border-opacity-30 rounded-lg outline-none"
           />
         </label>
 
         <button
           type="submit"
-          className=" py-3 px-8 rounded-xl outline-none w-fit text-black-100 text-opacity-50 font-light shadow-md"
+          className="bg-[#28003e] py-3 px-8 rounded-md outline-none w-full text-white tracking-wide font-light shadow-md"
         >
           {loading ? "Sending..." : "Send"}
         </button>

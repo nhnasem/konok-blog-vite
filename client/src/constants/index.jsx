@@ -1,11 +1,11 @@
 export const navLinks = [
+  // {
+  //   id: "",
+  //   forAdmin: false,
+  //   title: "Home",
+  // },
   {
     id: "",
-    forAdmin: false,
-    title: "Home",
-  },
-  {
-    id: "blog",
     forAdmin: false,
     title: "Blog",
   },

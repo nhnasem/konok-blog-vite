@@ -59,9 +59,9 @@ const Login = () => {
   if (isLoading) return <p>Loading...</p>;
 
   const content = (
-    <section>
+    <section className="border px-4 py-3 w-[400px] translate-y-[30%] mx-auto my-10 rounded-lg shadow-md">
       <header className="text-center">
-        <h1 className="text-5xl font-light text-green-800">Login</h1>
+        <h1 className="mt-5 mb-10 tracking-widest text-3xl font-light text-green-600">Login</h1>
       </header>
       <main>
         <p ref={errRef} aria-live="assertive">
@@ -71,9 +71,9 @@ const Login = () => {
           className="flex flex-col justify-start mx-10"
           onSubmit={handleSubmit}
         >
-          <label htmlFor="email">Email:</label>
+          <label className="text-sm text-gray-500 mb-1 font-light tracking-wider" htmlFor="email">Email:</label>
           <input
-            className="border px-4 py-2 w-[300px]"
+            className="text-gray-700 bg-green-100 border px-4 py-2 w-full rounded-md mb-4"
             type="text"
             id="email"
             ref={userRef}
@@ -83,9 +83,9 @@ const Login = () => {
             required
           />
 
-          <label htmlFor="password">Password:</label>
+          <label className="text-sm text-gray-500 mb-1 font-light tracking-wider" htmlFor="password">Password:</label>
           <input
-            className="border px-4 py-2 w-[300px]"
+            className="text-gray-700 bg-green-100 mb-1 border px-4 py-2 w-full rounded-md"
             type="password"
             id="password"
             onChange={handlePwdInput}
@@ -93,7 +93,7 @@ const Login = () => {
             required
           />
 
-          <button className="px-4 py-2 bg-green-900 text-white-100 w-[100px] my-4">Sign in</button>
+          <button className="w-full rounded-md px-4 py-[10px] bg-green-600 text-white-100 mb-16 mt-5 text-center">Log in</button>
 
           {/* <label className="px-4 py-2 bg-green-800 text-white-100 w-[250px]" htmlFor="persist">
             <input
@@ -106,9 +106,9 @@ const Login = () => {
           </label> */}
         </form>
       </main>
-      <footer>
+      {/* <footer className="text-center text-blue-600 tracking-wider mb-4 mt-2 hover:underline">
         <Link to="/">Back to Home</Link>
-      </footer>
+      </footer> */}
     </section>
   );
 

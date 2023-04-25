@@ -16,7 +16,8 @@ module.exports = {
         card2: "0 .1rem 1rem rgba(0, 0, 0, 0.1);"
       },
       screens: {
-        xs: "450px",
+        xs: "360px",
+        sm: "525px"
       },
     },
   },

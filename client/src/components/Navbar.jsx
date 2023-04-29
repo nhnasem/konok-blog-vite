@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import logo from "../assets/logo.png";
 import logo2 from "../assets/logo2.png";
@@ -8,13 +10,17 @@ import menu from "../assets/menu.svg";
 import { navLinks } from "../constants";
 import useAuth from "../hooks/useAuth";
 import PersistLogin from "../features/auth/PersistLogin";
-
 import { useSendLogoutMutation } from "../features/auth/authApiSlice";
-import { useNavigate } from "react-router-dom";
+
+import { selectNavbarActiveLink, setNavbarLinkActive } from "./navbarSlice";
 
 export default function Navbar() {
   const { isAdmin } = useAuth();
   const { token } = PersistLogin();
+
+  const dispatch = useDispatch();
+  const navbarActiveLink = useSelector(selectNavbarActiveLink);
+  console.log("navbar active link: ", navbarActiveLink);
 
   const [sendLogout] = useSendLogoutMutation();
 
@@ -45,6 +51,88 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navbarBlogPageLink = (
+    <li onClick={() => dispatch(setNavbarLinkActive("Blog"))}>
+      <Link to="/">
+        <p
+          className={`hover:text-[#ff0200] transition-all duration-300 ease-in ${
+            navbarActiveLink === "Blog" ? "text-[#ff0200]" : "text-white"
+          }`}
+        >
+          Blog
+        </p>
+      </Link>
+    </li>
+  );
+
+  const navbarAddNewPostPageLink = (
+    <li onClick={() => dispatch(setNavbarLinkActive("Add New Post"))}>
+      <Link to="/add-new-post">
+        <p
+          className={`hover:text-[#ff0200] transition-all duration-300 ease-in ${
+            navbarActiveLink === "Add New Post"
+              ? "text-[#ff0200]"
+              : "text-white"
+          }`}
+        >
+          Add New Post
+        </p>
+      </Link>
+    </li>
+  );
+
+  const navbarAboutPageLink = (
+    <li onClick={() => dispatch(setNavbarLinkActive("About"))}>
+      <Link to="/about">
+        <p
+          className={`hover:text-[#ff0200] transition-all duration-300 ease-in ${
+            navbarActiveLink === "About" ? "text-[#ff0200]" : "text-white"
+          }`}
+        >
+          About
+        </p>
+      </Link>
+    </li>
+  );
+
+  const navbarContactPageLink = (
+    <li onClick={() => dispatch(setNavbarLinkActive("Contact"))}>
+      <Link to="/contact">
+        <p
+          className={`hover:text-[#ff0200] transition-all duration-300 ease-in ${
+            navbarActiveLink === "Contact" ? "text-[#ff0200]" : "text-white"
+          }`}
+        >
+          Contact
+        </p>
+      </Link>
+    </li>
+  );
+
+  const navbarLoginPageLink = (
+    <li onClick={() => dispatch(setNavbarLinkActive("Login"))}>
+      <Link to="/login">
+        <p
+          className={`hover:text-[#ff0200] transition-all duration-300 ease-in ${
+            navbarActiveLink === "Login" ? "text-[#ff0200]" : "text-white"
+          }`}
+        >
+          Login
+        </p>
+      </Link>
+    </li>
+  );
+
+  const navbarLogoutPageLink = (
+    <li onClick={logoutHandler}>
+      <Link to="">
+        <p className="text-white hover:text-[#ff0200] transition-all duration-300 ease-in">
+          Logout
+        </p>
+      </Link>
+    </li>
+  );
+
   return (
     <header
       className={`z-[999] fixed top-0 xs:px-10 sm:px-10 md:px-16 w-full px-10  py-5 transition-all duration-150 ease-in ${
@@ -73,47 +161,17 @@ export default function Navbar() {
         </div>
 
         <ul className="list-none hidden md:flex flex-row gap-5">
-          <li>
-            <Link to="/">
-              <p className="text-white">Blog</p>
-            </Link>
-          </li>
+          {navbarBlogPageLink}
 
-          {isAdmin && (
-            <li>
-              <Link to="/add-new-post">
-                <p className="text-white">Add New Post</p>
-              </Link>
-            </li>
-          )}
+          {isAdmin && navbarAddNewPostPageLink}
 
-          <li>
-            <Link to="/about">
-              <p className="text-white">About</p>
-            </Link>
-          </li>
+          {navbarAboutPageLink}
 
-          <li>
-            <Link to="/contact">
-              <p className="text-white">Contact</p>
-            </Link>
-          </li>
+          {navbarContactPageLink}
 
-          {!token && (
-            <li>
-              <Link to="/login">
-                <p className="text-white">Login</p>
-              </Link>
-            </li>
-          )}
+          {!token && navbarLoginPageLink}
 
-          {token && (
-            <li onClick={logoutHandler}>
-              <Link to="">
-                <p className="text-white">Logout</p>
-              </Link>
-            </li>
-          )}
+          {token && navbarLogoutPageLink}
         </ul>
 
         {/* <ul className="list-none hidden md:flex flex-row gap-5">
@@ -147,22 +205,17 @@ export default function Navbar() {
             } bg-[#25003e] p-6 black-gradient absolute top-[70px] right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl cursor-pointer`}
           >
             <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] hover:text-red-400 transition-all duration-150 ease-in ${
-                    active === nav.title ? "text-red-400" : "text-white"
-                  } ${nav.forAdmin && !isAdmin ? "hidden" : ""}`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <Link to={nav.id}>
-                    <p className="text-base">{nav.title}</p>
-                  </Link>
-                </li>
-              ))}
+              {navbarBlogPageLink}
+
+              {isAdmin && navbarAddNewPostPageLink}
+
+              {navbarAboutPageLink}
+
+              {navbarContactPageLink}
+
+              {!token && navbarLoginPageLink}
+
+              {token && navbarLogoutPageLink}
             </ul>
           </div>
         </div>

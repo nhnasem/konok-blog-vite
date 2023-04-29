@@ -48,7 +48,13 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
+
   }, []);
+
+  const webpageLogoClickHandler = () => {
+    dispatch(setNavbarLinkActive(""))
+    window.scrollTo(0, 0);
+  }
 
   const navbarBlogPageLink = (
     <li onClick={() => dispatch(setNavbarLinkActive("Blog"))}>
@@ -141,7 +147,7 @@ export default function Navbar() {
       <nav className={`flex items-center justify-between ]`}>
         <div className="mx-">
           {/* Logo */}
-          <div className=" text-white text-3xl select-none">
+          <div onClick={() => webpageLogoClickHandler()} className="cursor-pointer text-white text-3xl select-none">
             <p className="font-['Aclonica'] font-bold text-[#ff0200]">Konok</p>
           </div>
           {/* <Link

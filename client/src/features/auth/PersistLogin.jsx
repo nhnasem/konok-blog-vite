@@ -8,7 +8,6 @@ import { selectCurrentToken } from "./authSlice";
 
 const PersistLogin = () => {
   const token = useSelector(selectCurrentToken);
-  console.log("token from PersistLogin: ", token);
   const effectRan = useRef(false);
 
   const [trueSuccess, setTrueSuccess] = useState(false);
@@ -21,7 +20,7 @@ const PersistLogin = () => {
       // React 18 Strict Mode
 
       const verifyRefreshToken = async () => {
-        console.log("verifying refresh token");
+        // console.log("verifying refresh token");
         try {
           //const response =
           await refresh();

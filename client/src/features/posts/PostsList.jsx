@@ -49,7 +49,7 @@ export default function PostsList() {
   if (isLoading) {
     content = <p>"Loading..."</p>;
   } else if (isSuccess) {
-    content = posts.posts.map((post) => <PostsExcerpt post={post} />);
+    content = posts.posts.map((post) => <PostsExcerpt key={post._id} post={post} />);
   } else if (isError) {
     content = <p>{error}</p>;
   }

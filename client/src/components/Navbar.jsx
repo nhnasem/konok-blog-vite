@@ -20,7 +20,6 @@ export default function Navbar() {
 
   const dispatch = useDispatch();
   const navbarActiveLink = useSelector(selectNavbarActiveLink);
-  console.log("navbar active link: ", navbarActiveLink);
 
   const [sendLogout] = useSendLogoutMutation();
 
